@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vietnam Airlines NEO - Logic Failure Review</title>
+<style>
+:root{
+    --primary:#E91E63;
+    --secondary:#FCE4EC;
+    --danger:#D81B60;
+    --success:#EC407A;
+    --warning:#F8BBD0;
+    --text:#2D1B2E;
+    --border:#F3D1E0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:#FFF5F8;
+    color:var(--text);
+    line-height:1.7;
+}
+.container{width:90%;max-width:1200px;margin:auto;padding:40px 0}
+header{
+    background:linear-gradient(135deg,#EC407A,#E91E63);
+    color:white;padding:50px;border-radius:18px;
+    margin-bottom:30px;box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.card{
+    background:white;padding:30px;border-radius:18px;
+    margin-bottom:25px;box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+.section-title{
+    color:var(--primary);margin-bottom:20px;
+    border-left:6px solid var(--primary);padding-left:12px;
+}
+.success-box,.error-box,.highlight,.quote{
+    padding:15px;border-radius:10px;margin-top:15px;
+}
+.success-box{background:#FCE4EC;border-left:5px solid var(--success)}
+.error-box{background:#FDE7EF;border-left:5px solid var(--danger)}
+.highlight{background:#FFF0F5;border-left:5px solid var(--warning)}
+.quote{background:#FFF7FA;border-left:5px solid var(--primary)}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid var(--border);padding:12px}
+th{background:var(--primary);color:white}
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.flow-box{padding:20px;border-radius:12px}
+.asis{background:#FDE7EF}
+.tobe{background:#FCE4EC}
+footer{text-align:center;color:#666;margin-top:30px}
+@media(max-width:768px){.flow{grid-template-columns:1fr}}
+.screenshot{
+    margin:20px 0;
+    text-align:center;
+}
+
+.screenshot img{
+    width:100%;
+    max-width:700px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.screenshot img:hover{
+    transform:scale(1.02);
+}
+
+.img-container{
+    overflow:hidden;
+    border-radius:16px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>🌸 MỔ APP AI THẬT — Vietnam Airlines NEO</h1>
+<p>Phân tích lỗi suy luận (Reasoning Failure) của chatbot Vietnam Airlines</p>
+</header>
+
+<div class="card">
+<h2 class="section-title">1. Thông tin sản phẩm</h2>
+<ul>
+<li><b>Sản phẩm:</b> Vietnam Airlines NEO</li>
+<li><b>AI Feature:</b> Chatbot hỗ trợ khách hàng</li>
+<li><b>Case:</b> Lỗi suy luận logic</li>
+</ul>
+</div>
+
+<div class="card">
+<h2 class="section-title">2. Promise vs Reality</h2>
+<ul>
+<li><b>Promise:</b> Trả lời chính sách hàng không chính xác.</li>
+<li><b>Kỳ vọng:</b> Trích dẫn đúng và suy luận đúng.</li>
+</ul>
+
+<div class="success-box">
+<b>Điểm tốt:</b><br>
+Bot truy xuất đúng quy định: "tối đa 9 người, không bao gồm trẻ em dưới 2 tuổi".
+</div>
+
+<div class="error-box">
+<b>Điểm gãy:</b><br>
+Bot đưa ra kết luận mâu thuẫn với chính quy định vừa trích dẫn.
+</div>
+</div>
+
+<div class="card">
+    <h2 class="section-title">3. Evidence</h2>
+
+    <div class="screenshot">
+        <div class="img-container">
+            <img src="screenshot.png" alt="Vietnam Airlines Logic Failure">
+        </div>
+    </div>
+
+    <div class="highlight">
+        <strong>User hỏi:</strong><br>
+        "Vậy 9 người và 100 trẻ thì sao?"
+    </div>
+
+    <div class="error-box">
+        <strong>Quan sát:</strong><br><br>
+
+        Chatbot trả lời:
+
+        <ul>
+            <li>
+                "Quý khách chỉ có thể đặt tối đa cho 9 người
+                (không bao gồm trẻ em dưới 2 tuổi)"
+            </li>
+
+            <li>
+                "Do đó, việc đặt cùng lúc 9 người lớn và
+                100 trẻ em là không thể thực hiện trực tuyến"
+            </li>
+        </ul>
+
+        <br>
+
+        Kết luận cuối không được suy ra từ tiền đề phía trên.
+        Nếu trẻ em dưới 2 tuổi không nằm trong giới hạn 9 người
+        thì chatbot cần giải thích thêm lý do khác thay vì kết luận
+        trực tiếp như vậy.
+    </div>
+</div>
+
+<div class="card">
+<h2 class="section-title">4. Four Paths Analysis</h2>
+<table>
+<tr>
+<th>Path</th>
+<th>Quan sát</th>
+</tr>
+<tr>
+<td>Happy Path</td>
+<td>Bot tìm được đúng policy.</td>
+</tr>
+<tr>
+<td>Low Confidence</td>
+<td>Không hỏi lại mà tự suy luận.</td>
+</tr>
+<tr>
+<td>Failure</td>
+<td>Kết luận mâu thuẫn với policy.</td>
+</tr>
+<tr>
+<td>Correction</td>
+<td>Không thấy cơ chế kiểm tra nhất quán.</td>
+</tr>
+</table>
+</div>
+
+<div class="card">
+<h2 class="section-title">5. Findings & Recommendations</h2>
+
+<div class="quote">
+<h3>Finding #1 — Logical Reasoning Failure</h3>
+
+<p>
+Chatbot hiểu đúng dữ liệu nhưng áp dụng sai dữ liệu vào tình huống cụ thể.
+Đây là lỗi reasoning chứ không phải lỗi retrieval.
+</p>
+
+<br>
+
+<b>Đề xuất:</b>
+<ul>
+<li>Thêm Consistency Check trước khi trả lời.</li>
+<li>So sánh kết luận với policy nguồn.</li>
+<li>Áp dụng validation rule cho các điều kiện ngoại lệ.</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+<h2 class="section-title">6. As-Is vs To-Be</h2>
+
+<div class="flow">
+
+<div class="flow-box asis">
+<h3>❌ As-Is</h3>
+User hỏi trường hợp đặc biệt<br>
+⬇<br>
+Bot lấy đúng policy<br>
+⬇<br>
+Bot suy luận sai<br>
+⬇<br>
+Kết luận mâu thuẫn
+</div>
+
+<div class="flow-box tobe">
+<h3>✅ To-Be</h3>
+User hỏi trường hợp đặc biệt<br>
+⬇<br>
+Bot lấy policy<br>
+⬇<br>
+Consistency Check<br>
+⬇<br>
+Trả lời nhất quán
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2 class="section-title">7. Kết luận</h2>
+<p>
+Vietnam Airlines NEO cho thấy khả năng truy xuất đúng chính sách nhưng vẫn tồn tại lỗi suy luận.
+Nguy cơ lớn nhất là chatbot trả lời rất tự tin dù kết luận không phù hợp với chính thông tin mà nó vừa viện dẫn.
+</p>
+</div>
+
+<footer>
+AI Product Review • Vietnam Airlines NEO • Logic Failure Case Study
+</footer>
+
+</div>
+</body>
+</html>
